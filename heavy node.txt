@@ -1,0 +1,77 @@
+#include<bits/stdc++.h>
+using namespace std;
+int t[10000];//t[i]->parent
+int sum[10000];//no of heavy children
+bool b[10000];//if current node is power node 
+bool check(int n)
+{
+	int s=0;
+	for(int i=1;i<=n;i++)
+	{
+		if(n%i==0)
+		s=s+i;
+	}
+	return((s%3)==0?true:false);
+	
+}
+void carry(int i,int f){
+	while(i!=0)
+	{
+		sum[i]+=f;
+		i=t[i];
+	}
+}
+int main(){
+	
+	
+	int n,q,s,e,i,j,k;
+	bool temp;
+	cin>>n>>q;
+		for(i=1;i<n;i++)
+		{
+		t[i]=0;
+		sum[i]=0;
+		b[i]=false;
+	}
+	for(i=1;i<n;i++)
+	{
+		
+		cin>>s>>e;
+		t[e]=s;
+	}
+	
+	for(i=1;i<=n;i++)
+	{
+	cin>>s;
+	b[i]=check(s);
+	if(b[i]==true)
+	{
+
+		carry(i,1);
+	}
+	}
+
+	for(i=0;i<q;i++)
+	{
+		cin>>s;
+		if(s==2)
+		{
+			cin>>j;
+			cout<<sum[j]<<endl;
+		}
+		else
+		{
+			
+			cin>>j>>k;
+			temp=b[j];
+			b[j]=check(k);
+			if(b[j]!=temp)
+			{
+				carry(j,b[j]?1:-1);
+			}
+		}
+		
+	}
+
+	return 0;
+}
