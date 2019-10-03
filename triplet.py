@@ -1,6 +1,7 @@
 n=int(input())
 # a=list(map(int,input().split()))
 a=[]
+
 for i in range(n):
 	x=int(input())
 	a.append(x)
@@ -30,6 +31,7 @@ for i in range(len(arr)):
 				cc+=1
 			if cc==1:
 				ans+=(d[arr[i]]*d[arr[j]]*d[arr[k]])
+				
 for i in range(len(arr)):
 	if d[arr[i]]<2:
 		continue 
